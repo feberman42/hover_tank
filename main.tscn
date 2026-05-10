@@ -1,27 +1,60 @@
 [gd_scene format=3 uid="uid://bgn8jho1cc3l1"]
 
+[ext_resource type="Script" uid="uid://duu5igee0f1kj" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://c2e6qawvhawr2" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cdxi30qd71htb" path="res://player.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://1q6phu7okm4e" path="res://wall.tscn" id="4_1bvp3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
+friction = 0.5
+bounce = 0.7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(128, 128)
 
 [node name="main" type="Node2D" unique_id=690570536]
+script = ExtResource("1_h2yge")
 
 [node name="background" type="Sprite2D" parent="." unique_id=895199510]
+modulate = Color(0.34220693, 0.34220695, 0.3422069, 1)
 position = Vector2(578, 326)
 scale = Vector2(9.062501, 5)
 texture = ExtResource("1_ig7tw")
 
-[node name="player" type="CharacterBody2D" parent="." unique_id=1530191622]
-scale = Vector2(0.31, 0.31)
-motion_mode = 1
+[node name="player" type="RigidBody2D" parent="." unique_id=1802809385]
+position = Vector2(508.99997, 276.99997)
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+gravity_scale = 0.0
+linear_damp = 1.0
 script = ExtResource("2_0xm2m")
 speed = 200.0
 drag_factor = 0.5
 
-[node name="Sprite2D" type="Sprite2D" parent="player" unique_id=688690826]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=1350256452]
+scale = Vector2(0.34, 0.34)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="player/CollisionShape2D" unique_id=688690826]
 texture = ExtResource("1_ig7tw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=1350256452]
-shape = SubResource("RectangleShape2D_0xm2m")
+[node name="Camera2D" type="Camera2D" parent="." unique_id=777906067]
+position = Vector2(576, 322)
+
+[node name="wall" parent="." unique_id=457395275 instance=ExtResource("4_1bvp3")]
+position = Vector2(67, 282.00003)
+scale = Vector2(0.31675008, 7.5517797)
+
+[node name="wall2" parent="." unique_id=793136460 instance=ExtResource("4_1bvp3")]
+position = Vector2(1059, 309.00003)
+scale = Vector2(0.31675008, 7.5517797)
+
+[node name="wall3" parent="." unique_id=652077075 instance=ExtResource("4_1bvp3")]
+position = Vector2(447.99994, 58.999996)
+rotation = 1.572212
+scale = Vector2(0.48514104, 12.664719)
+
+[node name="wall4" parent="." unique_id=1126735455 instance=ExtResource("4_1bvp3")]
+position = Vector2(536.99994, 573)
+rotation = 1.572212
+scale = Vector2(-0.23772068, 13.03735)
